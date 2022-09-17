@@ -1,1 +1,1 @@
-​
+string.find() function return -1 if the substrig is not present in the string.
