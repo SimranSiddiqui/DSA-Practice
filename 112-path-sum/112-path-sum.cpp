@@ -10,23 +10,17 @@
  * };
  */
 class Solution {
-    
-    bool pathSum(TreeNode* root, int target)
-    {
-         if(root == NULL)
-            return false;
-        if(!root->left && !root->right && root->val==target)
-            return true;
-        if(!root->left && !root->right && root->val!=target)
-            return false;
-        
-        return pathSum(root->left,target-(root->val)) || pathSum(root->right,target-(root->val));
-    }
-    
 public:
     bool hasPathSum(TreeNode* root, int targetSum) {
         if(root==NULL)
             return false;
-       return pathSum(root,targetSum);
+        if(!root->left && !root->right && root->val==targetSum)
+            return true;
+        if(!root->left && !root->right && root->val!=targetSum)
+            return false;
+        
+        
+      
+        return hasPathSum(root->left,targetSum-(root->val)) || hasPathSum(root->right,targetSum-(root->val));
     }
 };
