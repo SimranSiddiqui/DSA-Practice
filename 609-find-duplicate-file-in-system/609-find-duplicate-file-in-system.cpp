@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<string>> findDuplicate(vector<string>& paths) {
         int n = paths.size();
-        unordered_map<string,vector<pair<string,string>>> mp;
+        unordered_map<string,vector<string>> mp;
         vector<vector<string>> ans;
         
         for(int i=0;i<n;i++)
@@ -36,13 +36,8 @@ public:
                 }
                 j+=2;
                 
-                if(mp.find(text) != mp.end())
-                mp[text].push_back({root,num});
-                else
-                {
-                    vector<pair<string,string>> vect(1,{root,num});
-                    mp[text] = vect;   
-                }
+                
+                mp[text].push_back(root+"/"+num+".txt");
             }   
         }
         
@@ -51,15 +46,12 @@ public:
             if(it.second.size()>1)
             {
                 int v = it.second.size();
-                vector<string> elem;
                 
-                for(int i=0;i<v;i++)
-                {
-                    string x = it.second[i].first + "/" + it.second[i].second + ".txt";
-                    elem.push_back(x);
-                }
+               
                 
-                ans.push_back(elem);
+                    ans.push_back(it.second);
+            
+                
             }
         }
         
