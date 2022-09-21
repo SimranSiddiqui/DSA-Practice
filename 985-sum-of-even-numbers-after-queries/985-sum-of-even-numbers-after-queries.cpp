@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> sumEvenAfterQueries(vector<int>& nums, vector<vector<int>>& queries) {
         vector<int> ans;
-        long sum =0;
+        int sum =0;
         
          int n = nums.size();
         
