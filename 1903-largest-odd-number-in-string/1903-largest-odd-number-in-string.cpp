@@ -10,8 +10,12 @@ public:
             {
                 break;
             }
+            else
+            {
+                num.erase(num.begin()+i);
+            }
         }
         
-        return num.substr(0,i+1);
+       return num;
     }
 };
