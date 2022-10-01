@@ -31,7 +31,7 @@ class Solution {
     
 public:
     int numDecodings(string s) {
-        int dp[101];
+        int dp[s.length()+1];
         memset(dp,-1,sizeof dp);
         return count(0,s,dp);
     }
