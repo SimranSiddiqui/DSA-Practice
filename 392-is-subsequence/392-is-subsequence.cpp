@@ -8,6 +8,9 @@ public:
         else if(n1 == 0)
             return false;
         
+        if(dp[n1] != -1)
+            return dp[n1];
+        
         if(t[n1-1] == s[n2-1])
             return dp[n1] = dynamic(t, s, n1-1, n2-1, dp);
         
