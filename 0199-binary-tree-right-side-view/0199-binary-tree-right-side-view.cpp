@@ -18,8 +18,6 @@ public:
         
         vector<int> ans;
         queue<TreeNode *> q;
-        stack<TreeNode *> st;
-        st.push(root);
         q.push(root);
         
         while(!q.empty())
@@ -32,19 +30,16 @@ public:
                 
                  if(i==n-1)
                  {
-                     ans.push_back(node->val);
-                    
+                     ans.push_back(node->val);  
                  }
                 
                 if(node->left)
                 {
                     q.push(node->left);
-                    st.push(node->left);
                 }
                 if(node->right)
                 {
                     q.push(node->right);
-                    st.push(node->right);
                 }
             }
         }
