@@ -30,10 +30,10 @@ public:
                 TreeNode *node = q.front();
                 q.pop();
                 
-                 if(i==0 && !st.empty())
+                 if(i==n-1)
                  {
-                     TreeNode *temp = st.top();
-                     ans.push_back(temp->val);
+                     ans.push_back(node->val);
+                    
                  }
                 
                 if(node->left)
