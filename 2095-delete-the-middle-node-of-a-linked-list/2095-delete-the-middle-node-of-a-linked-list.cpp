@@ -27,7 +27,6 @@ public:
         }
         
         temp->next = temp->next->next;
-        
         return head;
     }
 };
