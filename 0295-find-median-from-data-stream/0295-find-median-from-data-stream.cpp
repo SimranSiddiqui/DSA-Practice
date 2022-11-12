@@ -12,12 +12,12 @@ public:
             large.push(small.top());
             small.pop();
         }
-        if(!small.empty() && small.size() == large.size()+2)
+        if(!small.empty() && small.size() > large.size()+1)          // small.size()-large.size() > 1  ??
         {
               large.push(small.top());
               small.pop();
         }
-        else if(!large.empty() && large.size() == small.size()+2)
+        else if(!large.empty() && large.size() > small.size()+1)      // large.size()-small.size() > 1  ??
         {
             small.push(large.top());
             large.pop();
