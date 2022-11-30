@@ -28,7 +28,7 @@ public:
             {
                 prev = prev->right;
             }
-            if(prev->right == NULL)
+            if(!prev->right)
             {
                 prev->right = cur;
                 cur = cur->left;
