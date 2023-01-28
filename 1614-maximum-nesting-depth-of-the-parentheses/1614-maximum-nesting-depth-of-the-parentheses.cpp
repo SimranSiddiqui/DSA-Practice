@@ -2,23 +2,17 @@ class Solution {
 public:
     int maxDepth(string s) {
         int n = s.length();
-        stack<char> st;
         int ans = INT_MIN;
+        int curr = 0;
         
         for(int i=0;i<n;i++)
         {
             if(s[i] == '(')
-            {
-                st.push(s[i]);
-            }
+                curr++;
             else if(s[i] == ')')
-            {
-                st.pop();
-            }
+                curr--;
             
-           
-            int curr = st.size();
-            ans = max(ans,curr);
+            ans = max(ans, curr);
         }
         
         return ans;
