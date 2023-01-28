@@ -10,32 +10,32 @@
  * };
  */
 class Solution {
-public:
-     bool solve(TreeNode* root, long maxi, long mini){
-        // cout<<endl;
-        // cout<<"maxi : "<<maxi<<" mini : "<<mini<<" ";
-        if(!root){
-            // cout<<" 1 ";
+    bool validate(TreeNode* root, long mini, long maxi)
+    {
+        if(!root)
             return true;
-        }
-        if(root->val >= maxi || root->val <= mini){
-            // cout<<" 2 ";
+        
+        if(root->val <= maxi || root->val >= mini)
             return false;
-        }
-        if(root->left) if(root->left->val >= root->val){
-            // cout<<" 3 ";
-            return false;
-        }
-        if(root->right) if(root->right->val <= root->val){
-            // cout<<" 4 ";
-            return false;
-        }
-        // cout<<" 5 ";
-        return solve(root->left, root->val, mini) && solve(root->right, maxi, root->val);
+        
+        long value = root->val;
+        long newMini = min(mini, value);
+        long newMaxi = max(value, maxi);
+        
+        return validate(root->left, newMini, maxi) && validate(root->right, mini, newMaxi);
+            
     }
     
+public:
     bool isValidBST(TreeNode* root) {
-        if(!root) return true;
-        return solve(root->left, root->val, LONG_MIN) && solve(root->right, LONG_MAX, root->val);
+        if(!root || (!root->left && !root->right))
+            return true;
+        
+        long maxi = LONG_MIN;
+        long mini = LONG_MAX;
+        
+        cout << maxi ;
+        
+        return validate(root, mini, maxi);
     }
 };
