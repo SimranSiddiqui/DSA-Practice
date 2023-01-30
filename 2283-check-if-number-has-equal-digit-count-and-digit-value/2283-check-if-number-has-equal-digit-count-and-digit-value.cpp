@@ -1,17 +1,17 @@
 class Solution {
 public:
     bool digitCount(string num) {
-        unordered_map<int, int> mp;
+        unordered_map<char, int> mp;
         int n = num.length();
         
         for(int i=0;i<n;i++)
         {
-            mp[num[i] - '0']++;
+            mp[num[i]]++;
         }
         
         for(int i=0;i<n;i++)
         {
-            if(mp[i] != num[i]-'0')
+            if(mp[i + '0'] != num[i]-'0')
              return false;   
         }
         
