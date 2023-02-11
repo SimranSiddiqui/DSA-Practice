@@ -10,15 +10,26 @@
  * };
  */
 class Solution {
-    
-     bool ismi(TreeNode* root1,TreeNode* root2){
-        if(!root1&&!root2) return true;
-        if((!root1&&root2)||(root1&&!root2)) return false;
-        if(root1->val==root2->val) return (ismi(root1->left,root2->right)&&ismi(root1->right,root2->left));
-        else return false;
+    bool check(TreeNode* root1, TreeNode* root2)
+    {
+        if(!root1 && !root2)
+            return true;
+        if(!root1 || !root2)
+            return false;
+        
+        if(root1->val != root2->val)
+            return false;
+        
+        return check(root1->right, root2->left) && check(root1->left, root2->right);
     }
+    
 public:
     bool isSymmetric(TreeNode* root) {
-      return  ismi(root->left, root->right);
+        if(root == NULL)
+            return true;
+        else if(!root->right && !root->left)
+            return true;
+        
+        return check(root->right, root->left);   
     }
 };
