@@ -1,28 +1,26 @@
 class Solution {
-    void calSum(vector<int> &candidates, int target, int &sum, int n, set<vector<int>> &st, vector<int> &x)
+    
+    void function(vector<int>& candidates, int target, int i, int n, vector<int>& curr, vector<vector<int>>& ans, int sum)
     {
-        if(n < 0)
+        if(i >= n)
         {
             if(sum == target)
-                st.insert(x);
-            
-            return ;
-        }
-        
-        if(sum >= target)
-        {
-            if(sum == target)
-            st.insert(x);
+            {
+                ans.push_back(curr);
+                return;
+            }
             return;
         }
         
-        int s1 = sum + candidates[n];
-        vector<int> v1 = x;
-        v1.push_back(candidates[n]);
+        curr.push_back(candidates[i]);
+        sum += candidates[i];
+        if(sum <= target)
+        function(candidates, target, i, n, curr, ans, sum);   // Including the element
         
-        calSum(candidates, target, s1, n-1, st, v1);
-        calSum(candidates, target, s1, n, st, v1);
-        calSum(candidates, target, sum, n-1, st, x);
+        curr.pop_back();
+        sum -= candidates[i];
+        function(candidates, target, i+1, n, curr, ans, sum);
+        
         
     }
     
@@ -30,14 +28,9 @@ public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> ans;
         int n = candidates.size();
-        int sum =0;
-        vector<int> x;
-        set<vector<int>> st;
         
-        calSum(candidates, target, sum, n-1, st, x);
-        
-        for(auto it: st)
-            ans.push_back(it);
+        vector<int> curr;
+        function(candidates, target, 0, n, curr, ans, 0);
         
         return ans;
     }
