@@ -1,38 +1,26 @@
 class Solution {
-    void func(set<vector<int>>& st, vector<int>& nums, int n, vector<int>& curr)
+    
+    void func(vector<int>& nums, vector<vector<int>>& ans, int n, int i, vector<int>& curr)
     {
-        sort(curr.begin(), curr.end());
-        vector<int> c = curr;
-        
-        if(n < 0)
+        if(i >= n)
         {
-           st.insert(curr);
-           st.insert(c);
-           return;   
+            ans.push_back(curr);
+            return;
         }
         
-        st.insert(curr);
-        st.insert(c);
-        
-        curr.push_back(nums[n]);
-        
-        func(st, nums, n-1, curr);
-        func(st, nums, n-1, c);
-        
+        curr.push_back(nums[i]);
+        func(nums, ans, n, i+1, curr);
+        curr.pop_back();
+        func(nums, ans, n, i+1, curr);
     }
     
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        set<vector<int>> st;
         int n = nums.size();
+        vector<vector<int>> ans;
         vector<int> curr;
-        func(st, nums, n-1, curr);
         
-        for(auto it: st)
-        {
-         ans.push_back(it);   
-        }
+        func(nums, ans, n, 0, curr);
         
         return ans;
     }
