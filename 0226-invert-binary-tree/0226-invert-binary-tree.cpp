@@ -10,15 +10,23 @@
  * };
  */
 class Solution {
-public:
-    void solve(TreeNode* root){
-        if(root==NULL)return;
-        swap(root->left,root->right);
-        solve(root->left);
-        solve(root->right);
+    
+    void inorder(TreeNode* root)
+    {
+        if(!root)
+            return;
+        
+        TreeNode* temp = root->right;
+        root->right = root->left;
+        root->left = temp;
+        
+        inorder(root->left);
+        inorder(root->right);
     }
+    
+public:
     TreeNode* invertTree(TreeNode* root) {
-        solve(root);
+        inorder(root);
         return root;
     }
 };
