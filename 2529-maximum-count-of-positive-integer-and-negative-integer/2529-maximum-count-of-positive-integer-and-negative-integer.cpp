@@ -7,7 +7,10 @@ public:
         for(int i=0;i<n;i++)
         {
             if(nums[i] > 0)
-                pos++;
+            {
+                pos = n - i;
+                break;
+            }
             else if(nums[i] < 0)
                 neg++;
         }
