@@ -1,44 +1,33 @@
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        int m = matrix.size();
-        int n = matrix[0].size();
+        int n = matrix.size();
+        int m = matrix[0].size();
         vector<int> ans;
         
-        int top = 0;
-        int bottom = m-1;
-        int left =0;
-        int right = n-1;
-        
-        while(left<=right && top<=bottom)
+        int up = 0, down = n-1, left = 0, right = m-1;
+        while(left<=right && up <= down)
         {
-            for(int i =left;i<=right && top<=bottom;i++)
+            for(int i=left;i<=right && up<=down;i++)
             {
-                int x = matrix[top][i];
-                ans.push_back(x);
+                ans.push_back(matrix[up][i]);
             }
-            top++;
-            
-            for(int i=top;i<=bottom && left<=right;i++)
+            up++;
+            for(int i=up;i<=down && left<=right;i++)
             {
-                int x = matrix[i][right];
-                ans.push_back(x);
+                ans.push_back(matrix[i][right]);
             }
             right--;
-            
-            for(int i=right;i>=left && top<=bottom;i--)
+            for(int i=right;i>=left && up<=down;i--)
             {
-                int x = matrix[bottom][i];
-                ans.push_back(x);   
+                ans.push_back(matrix[down][i]);
             }
-            bottom--;
-            
-            for(int i=bottom;i>=top && left<=right;i--)
+            down--;
+            for(int i=down;i>=up && left<=right;i--)
             {
-                int x = matrix[i][left];
-                ans.push_back(x);   
+                ans.push_back(matrix[i][left]);
             }
-            left++;  
+            left++;
         }
         
         return ans;
