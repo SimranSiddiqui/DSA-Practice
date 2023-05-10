@@ -3,40 +3,34 @@ public:
     vector<vector<int>> generateMatrix(int n) {
         vector<vector<int>> ans(n, vector<int>(n, 0));
         
-        int top =0, left =0;
-        int bottom =n-1, right =n-1;
-        int x = 1;
-        
-        while(top<=bottom && left<=right)
+        int top = 0, bottom =n-1, left = 0, right = n-1;
+        int num = 1;
+        while(top <= bottom && left <= right)
         {
-            for(int i=left;i<=right && top<=bottom;i++)
+            for(int i=left;i<=right && num<=n*n;i++)
             {
-                ans[top][i] = x;
-                x++;
+                ans[top][i] = num;
+                num++;
             }
             top++;
-            
-            for(int i=top;i<=bottom && left<=right;i++)
+            for(int i=top;i<=bottom&& num<=n*n;i++)
             {
-                ans[i][right] = x;
-                x++;
+                ans[i][right] = num;
+                num++;
             }
             right--;
-            
-            for(int i=right;i>=left && top<=bottom;i--)
+            for(int i=right;i>=left&& num<=n*n;i--)
             {
-                ans[bottom][i] = x;
-                x++;
+                ans[bottom][i] = num;
+                num++;
             }
             bottom--;
-            
-            for(int i=bottom;i>=top && left<=right;i--)
+            for(int i=bottom;i>=top&& num<=n*n;i--)
             {
-                ans[i][left] = x;
-                x++;
+                ans[i][left] = num;
+                num++;
             }
             left++;
-            
         }
         
         return ans;
