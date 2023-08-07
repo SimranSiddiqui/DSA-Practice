@@ -19,9 +19,9 @@ public:
         int m = matrix[0].size();
         int ans = INT_MAX;
         
+        vector<vector<long >> dp(n, vector<long >(m, INT_MAX));
         for(int i=m-1;i>=0;i--)
         {
-            vector<vector<long >> dp(n, vector<long >(m, INT_MAX));
             ans = min(ans, solve(n-1, i, matrix, dp));
         }
         
