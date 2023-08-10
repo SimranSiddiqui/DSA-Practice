@@ -1,23 +1,33 @@
 class Solution {
-    bool dfs(int i, vector<int> &ms, int side, vector<int> &v, int n) {
-        if(i == n) {
-            return v[0] == v[1] && v[1] == v[2] && v[2] == v[3];
+    bool solve(int n, vector<int> &match, vector<int> &side)
+    {
+        if(n < 0)
+        {
+            return side[0] == side[1] && side[1] == side[2] && side[2] == side[3];
         }
-        for(int k=0; k<4; k++) {
-            if(v[k] + ms[i] > side) continue;
-            v[k] += ms[i];
-            if(dfs(i + 1, ms, side, v, n)) return true;
-            v[k] -= ms[i];
+        
+        for(int i=0;i<4;i++)
+        {
+            if(side[i]-match[n] < 0) continue;
+            
+                side[i] -= match[n];
+                if(solve(n-1, match, side)) return true;
+                side[i] += match[n];
         }
+        
         return false;
     }
+    
 public:
-    bool makesquare(vector<int>& ms) {
-        int s = accumulate(ms.begin(), ms.end(), 0), n = ms.size();
-        if(s % 4) return false;
-        sort(ms.begin(), ms.end(), greater<int>());
-        int side = s / 4;
-        vector<int> v(4);
-        return dfs(0, ms, side, v, n);
+    bool makesquare(vector<int>& matchsticks) {
+        int n = matchsticks.size();
+        int sum = accumulate(matchsticks.begin(), matchsticks.end(), 0);
+        if(sum%4)
+            return 0;
+        
+        sort(matchsticks.begin(), matchsticks.end());
+        int len = sum/4;
+        vector<int> side(4, len);
+        return solve(n-1, matchsticks, side);
     }
 };
