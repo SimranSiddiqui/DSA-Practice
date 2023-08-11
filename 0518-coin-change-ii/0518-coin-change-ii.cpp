@@ -1,30 +1,28 @@
 class Solution {
     
-    int func(vector<int>& coins, int target, int n, vector<vector<int>>& dp)
-    {
-        if(n < 0)
-        {
-            if(target == 0)
-                return 1;
+    int solve(int n, vector<int> &coins, int amount, vector<vector<int>> &dp) {
+        if(amount == 0)
+            return 1;
+        if(amount < 0)
+            return 0;
+        if(n < 0){
             return 0;
         }
-        if(target < 0)
-            return 0;
         
-        if(dp[n][target] != -1)
-            return dp[n][target];
+        if(dp[n][amount] != -1)
+            return dp[n][amount];
         
-        int p = func(coins, target-coins[n], n, dp);
-        int np = func(coins, target, n-1, dp);
+        int pick =0, nPick=0;
+        pick = solve(n, coins, amount-coins[n], dp);
+        nPick = solve(n-1, coins, amount, dp);
         
-        return dp[n][target] = p+np;
+        return dp[n][amount] = pick + nPick ;
     }
     
 public:
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
-        
-        vector<vector<int>> dp(n+1, vector<int>(amount+1, -1));
-        return func(coins, amount, n-1, dp);
+        vector<vector<int>> dp(n, vector<int>(amount+1, -1));
+        return solve(n-1, coins, amount, dp);
     }
 };
