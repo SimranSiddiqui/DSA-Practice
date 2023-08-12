@@ -23,10 +23,9 @@ public:
         int m = grid.size();
         int n = grid[0].size();
         int ans = INT_MAX;
-        
+        vector<vector<int>> dp(m, vector<int>(n, -1));
         for(int i=0;i<n;i++)
         {
-             vector<vector<int>> dp(m, vector<int>(n, -1));
              ans = min(ans, solve(grid, moveCost, 0, i, dp));
         }
         
