@@ -13,9 +13,7 @@ public:
         for(auto it: mp)
             pq.push(make_pair(it.second, it.first));
         
-        if(n%2 && pq.top().first > n/2 +1)
-            return "";
-        if(n%2 == 0 && pq.top().first > n/2)
+        if(pq.top().first > n/2 +n%2)
             return "";
         
         int i =0, j=1;
