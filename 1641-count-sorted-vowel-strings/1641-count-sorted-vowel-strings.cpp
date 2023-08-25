@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<char> vowels = {'a', 'e', 'i', 'o', 'u'};
-    int solve(int n, char curr, vector<vector<int>> &dp)
+    int solve(int n, char curr)
     {
         if(n==0)
             return 1;
@@ -9,19 +9,14 @@ public:
         int ans = 0;
         for(int i=0;i<5;i++)
         {
-            if(dp[n][i] != -1)
-                ans += dp[n][i];
-            else if(vowels[i] >= curr)
-            {  
-              ans += solve(n-1, vowels[i], dp);   
-            }  
+            if(vowels[i] >= curr)
+              ans += solve(n-1, vowels[i]);   
         }
         
         return ans;
     }
     
     int countVowelStrings(int n) {
-        vector<vector<int>> dp(n+1, vector<int>(6, -1));
-        return solve(n, 'a', dp);
+        return solve(n, 'a');
     }
 };
