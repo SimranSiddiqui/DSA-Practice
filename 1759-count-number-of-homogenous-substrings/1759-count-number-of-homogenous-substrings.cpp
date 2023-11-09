@@ -14,7 +14,7 @@ public:
             
             while(s[i] == c)
             {
-                count = (count%mod + 1%mod)%mod;
+                count++;
                 ans = (ans%mod + count%mod)%mod;
                 i++;
             }
