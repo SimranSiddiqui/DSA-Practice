@@ -13,9 +13,6 @@ public:
             w2 += word2[i];
         }
         
-        if(w1==w2)
-            return true;
-        else
-            return false; 
+        return w1 == w2;
     }
 };
