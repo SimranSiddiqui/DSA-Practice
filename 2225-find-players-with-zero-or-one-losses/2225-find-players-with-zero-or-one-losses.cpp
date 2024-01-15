@@ -1,36 +1,32 @@
 class Solution {
 public:
     vector<vector<int>> findWinners(vector<vector<int>>& matches) {
-        unordered_map<int,int> win;
-        unordered_map<int,int> lose;
-        int n = matches.size();
+        unordered_map<int, int> mp;
+        vector<int> a, b;
+        vector<vector<int>> ans;
         
-        for(int i=0;i<n;i++)
+        for(auto it: matches)
         {
-            win[matches[i][0]]++;
-            lose[matches[i][1]]++;
+            mp[it[1]]++;
         }
         
-        vector<int> no;
-        vector<int> one;
-        for(auto it : win)
+        for(auto it: matches)
         {
-            if(lose.find(it.first) == lose.end())
-            {
-                no.push_back(it.first);
+            if(mp[it[1]] == 1 ){
+                a.push_back(it[1]);
+                mp[it[1]]++;
+            }
+            if(mp.find(it[0]) == mp.end()){
+                b.push_back(it[0]);
+                mp[it[0]] = 2;
             }
         }
         
-        for(auto it: lose)
-        {
-            if(it.second == 1)
-                one.push_back(it.first);
-        }
+        sort(a.begin(), a.end());
+        sort(b.begin(), b.end());
         
-        sort(no.begin(), no.end());
-        sort(one.begin(), one.end());
-        
-        vector<vector<int>> ans = {no, one};
+        ans.push_back(b);
+        ans.push_back(a);
         
         return ans;
     }
