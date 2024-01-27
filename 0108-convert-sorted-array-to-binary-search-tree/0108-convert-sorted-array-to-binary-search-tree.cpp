@@ -11,23 +11,23 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* &root, vector<int> &nums, int l, int r)
+    void solve(TreeNode** root, vector<int> &nums, int l, int r)
     {
         if(l <= r)
         {
             int mid = (l+r)/2;
-            root = new TreeNode();
-            root->val = nums[mid];
+            *root = new TreeNode();
+            (*root)->val = nums[mid];
             
-            solve(root->left, nums, l, mid-1);
-            solve(root->right, nums, mid+1, r);
+            solve(&(*root)->left, nums, l, mid-1);
+            solve(&(*root)->right, nums, mid+1, r);
         }
     }
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         int n = nums.size();
         TreeNode* root = NULL;
         
-        solve(root, nums, 0, n-1);
+        solve(&root, nums, 0, n-1);
         return root;
     }
 };
