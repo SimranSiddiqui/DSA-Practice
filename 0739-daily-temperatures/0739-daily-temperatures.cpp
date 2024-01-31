@@ -1,38 +1,36 @@
 class Solution {
 public:
-    vector<int> dailyTemperatures(vector<int>& temperatures) {
-        int n = temperatures.size();
-        stack<pair<int,int>> s;
-        vector<int> ans;
+    vector<int> dailyTemperatures(vector<int>& temp) {
+        int n = temp.size();
+        vector<int> nsr(n, 0);     
+        stack<pair<int, int>> st;
         
         for(int i=n-1;i>=0;i--)
         {
-            if(s.empty())
+            while(!st.empty() && st.top().first <= temp[i])
             {
-                ans.push_back(0);
-               
+                st.pop();
+            }
+            if(st.empty())
+            {
+                st.push({temp[i], i});
+                nsr[i] = 0;
             }
             else
             {
-             while(!s.empty() && s.top().first<=temperatures[i]) 
-             {
-                 s.pop();
-             }
-                
-                if(s.empty())
-                {
-                    ans.push_back(0);
-                }
-                else
-                {
-                    ans.push_back(s.top().second - i);
-                }
+                nsr[i] = st.top().second;
+                st.push({temp[i], i});
             }
-            
-            s.push({temperatures[i],i}); 
         }
         
-        reverse(ans.begin(),ans.end());
-        return ans;
+        for(int i=0;i<n;i++)
+        {
+            if(nsr[i] != 0)
+            {
+                nsr[i] = nsr[i] - i;
+            }
+        }
+        
+        return nsr;
     }
 };
