@@ -11,14 +11,19 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        ListNode* fast=head;
-        ListNode* slow=head;
-        while(fast!=NULL && fast->next!=NULL)
+        unordered_map<int, ListNode*> mp;
+        int count  = 1;
+        ListNode* node = head;
+        
+        while(node)
         {
-            fast = fast->next->next;
-            slow = slow->next;
+            mp[count] = node;
+            count++;
+            node = node->next;
         }
         
-       return slow;
+        int mid = ceil(float(count)/2);
+        
+        return mp[mid];
     }
 };
