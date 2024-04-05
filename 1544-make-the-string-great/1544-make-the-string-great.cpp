@@ -2,34 +2,26 @@ class Solution {
 public:
     string makeGood(string s) {
         int n = s.length();
-        stack<char> stk;
-        string ans;
-        int i =n-1;
+        stack<char> st;
         
-        while(i>=0)
+        for(int i=0;i<n;i++)
         {
-            if(stk.empty())
-            {
-                stk.push(s[i]);
-                i--;
-            }
-            else if(abs(stk.top()-s[i]) == 32)
-            {
-                stk.pop();
-                i--;
-            }
+            if(st.empty() || tolower(s[i]) != tolower(st.top()) || st.top() == s[i])
+                st.push(s[i]);
             else
             {
-                stk.push(s[i]);
-                i--;
+                st.pop();
             }
         }
         
-       while(!stk.empty())
-       {
-           ans += stk.top();
-           stk.pop();
-       }
+        int m = st.size();
+        string ans(m, '.');
+        while(!st.empty())
+        {
+            ans[m-1] = st.top();
+            m--;
+            st.pop();
+        }
         
         return ans;
     }
